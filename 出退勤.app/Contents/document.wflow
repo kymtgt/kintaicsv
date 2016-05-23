@@ -60,7 +60,7 @@
 				<dict>
 					<key>COMMAND_STRING</key>
 					<string>today =Time.now
-file = File.open("/Users/kymtgt/#{today.strftime("%Y%m")}.csv", "a+")
+file = File.open("#{ENV["HOME"]}/#{today.strftime("%Y%m")}.csv", "a+")
 date = today.strftime("%Y/%m/%d") 
 time = today.strftime("%H:%M")
 if file.read.slice(-1, 1) == "\s"
