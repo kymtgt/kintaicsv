@@ -59,13 +59,22 @@
 				<key>ActionParameters</key>
 				<dict>
 					<key>COMMAND_STRING</key>
-					<string>today =Time.now
-file = File.open("#{ENV["HOME"]}/#{today.strftime("%Y%m")}.csv", "a+")
-date = today.strftime("%Y/%m/%d") 
+					<string>require 'time'
+today =Time.now
+date = today.strftime("%Y/%m/%d")
 time = today.strftime("%H:%M")
-if file.read.slice(-1, 1) == "\s"
+file = File.open("#{ENV["HOME"]}/#{today.strftime("%Y%m")}.csv", "a+")
+ll = file.readlines[-1]
+if ll.slice(-1, 1) == "\s"
   file.print("#{time}\n")
 else
+  lastday = Time.parse(ll.slice(0,10))
+  nextday = lastday + 86400
+  while(nextday.to_date &lt; today.to_date) do
+    ndate = nextday.strftime("%Y/%m/%d")
+    file.print("#{ndate}, , \n")
+    nextday = nextday + 86400
+  end
   file.print("#{date}, #{time}, ")
 end
 file.close</string>
@@ -181,7 +190,7 @@ file.close</string>
 				<key>isViewVisible</key>
 				<true/>
 				<key>location</key>
-				<string>309.000000:253.000000</string>
+				<string>320.000000:450.000000</string>
 				<key>nibPath</key>
 				<string>/System/Library/Automator/Run Shell Script.action/Contents/Resources/Japanese.lproj/main.nib</string>
 			</dict>
