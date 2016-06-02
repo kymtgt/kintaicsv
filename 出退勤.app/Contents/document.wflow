@@ -65,17 +65,29 @@ date = today.strftime("%Y/%m/%d")
 time = today.strftime("%H:%M")
 file = File.open("#{ENV["HOME"]}/#{today.strftime("%Y%m")}.csv", "a+")
 ll = file.readlines[-1]
-if ll.slice(-1, 1) == "\s"
+if ll != nil &amp;&amp; ll.slice(-1, 1) == "\s"
+  # 出勤がある
   file.print("#{time}\n")
 else
-  lastday = Time.parse(ll.slice(0,10))
-  nextday = lastday + 86400
-  while(nextday.to_date &lt; today.to_date) do
-    ndate = nextday.strftime("%Y/%m/%d")
-    file.print("#{ndate}, , \n")
-    nextday = nextday + 86400
+  if today.day != 1
+    # 今日が1日じゃない
+    if ll == nil
+      # なのに新しいファイル（今月初出勤）
+      (today.day - 1).times do |i|
+        ndate = today.strftime("%Y/%m/#{i+1}")
+        file.print("#{ndate},,\n")
+      end
+    else
+      lastday = Time.parse(ll.slice(0,10))
+      nextday = lastday + 86400
+      while(nextday.to_date &lt; today.to_date) do
+        ndate = nextday.strftime("%Y/%m/%d")
+        file.print("#{ndate},,\n")
+        nextday = nextday + 86400
+      end
+    end
   end
-  file.print("#{date}, #{time}, ")
+  file.print("#{date},#{time},")
 end
 file.close</string>
 					<key>CheckedForUserDefaultShell</key>
@@ -190,7 +202,7 @@ file.close</string>
 				<key>isViewVisible</key>
 				<true/>
 				<key>location</key>
-				<string>320.000000:450.000000</string>
+				<string>320.000000:465.000000</string>
 				<key>nibPath</key>
 				<string>/System/Library/Automator/Run Shell Script.action/Contents/Resources/Japanese.lproj/main.nib</string>
 			</dict>
