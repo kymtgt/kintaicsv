@@ -65,7 +65,7 @@ date = today.strftime("%Y/%m/%d")
 time = today.strftime("%H:%M")
 file = File.open("#{ENV["HOME"]}/#{today.strftime("%Y%m")}.csv", "a+")
 ll = file.readlines[-1]
-if ll != nil &amp;&amp; ll.slice(-1, 1) == "\s"
+if ll != nil &amp;&amp; ll.slice(-1, 1) == ","
   # 出勤がある
   file.print("#{time}\n")
 else
@@ -202,7 +202,7 @@ file.close</string>
 				<key>isViewVisible</key>
 				<true/>
 				<key>location</key>
-				<string>320.000000:465.000000</string>
+				<string>320.000000:253.000000</string>
 				<key>nibPath</key>
 				<string>/System/Library/Automator/Run Shell Script.action/Contents/Resources/Japanese.lproj/main.nib</string>
 			</dict>
