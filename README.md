@@ -27,5 +27,5 @@ rubyで動かします。
 
 ### アプリアイコン用意しました
 
-http://linkerdesign.github.io/journal/2012/02/automator-1.html
+http://linkerdesign.github.io/journal/2012/02/automator-1.html  
 このやり方で反映できると思います。
